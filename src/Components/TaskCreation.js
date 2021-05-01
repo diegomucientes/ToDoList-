@@ -1,11 +1,13 @@
-import React, {useState}  from 'react';
+import React, {useState,useParams}  from 'react';
 
 const TaskCreation = (props) => {
     
     //console.log(props)
+    const params  = useParams();
+    console.log("llegue"+params);
     const {setTareas, tareas} = props
-    const [tarea, setTarea] = useState()
-
+    const [tarea, setTarea] = useState();
+    
     const onSubmit = (e) => {
         e.preventDefault();
 /*         const form = e.target;
@@ -24,12 +26,14 @@ const TaskCreation = (props) => {
     const onChange = (e) => {
         setTarea(e.target.value)
     }
+    
+    
 
     return (
         
         <form onSubmit={onSubmit}>
             <label htmlFor="ftarea">Tarea:</label>
-            <input type="text" id="ftarea" name="ftarea" onChange={onChange}/>
+            <input value={tarea}type="text" id="ftarea" name="ftarea" onChange={onChange}/>
             <button>Enviar</button>
         </form>
     );

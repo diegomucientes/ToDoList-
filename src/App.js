@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import TaskCreation from './Components/TaskCreation'
 import ShowTask from './Components/ShowTask'
 
 function App() {
   const [tareas, setTareas] = useState([]); 
+  
   
     return (
         <div className="App">
@@ -23,23 +24,23 @@ function App() {
                                     Crear Task
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link to="edit-task/:id">Editar Task</Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </nav>
 
                     {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+                    renders the first one that matches the current URL. */}
                     <Switch>
                         <Route path="/show-task">
-                            <ShowTask />
+                            <ShowTask tareas={tareas} />
                         </Route>
                         <Route path="/create-task">
                             <TaskCreation tareas={tareas} setTareas={setTareas}/>
                         </Route>
                         <Route path="/edit-task/:id">
-                            <TaskCreation />
+                            <TaskCreation tareas={tareas} setTareas={setTareas} />
                         </Route>
                     </Switch>
                 </div>
