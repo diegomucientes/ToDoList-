@@ -1,13 +1,15 @@
-import React, {useState,useParams}  from 'react';
+import React, {useState}  from 'react';
+import {useParams} from 'react-router-dom'
 
 const TaskCreation = (props) => {
     
     //console.log(props)
-    const params  = useParams();
-    console.log("llegue"+params);
+    const params  = useParams(); 
+    console.log(params);
     const {setTareas, tareas} = props
-    const [tarea, setTarea] = useState();
-    
+
+    const [tarea, setTarea] = useState(params.id? tareas[params.id] : "");
+    console.log(tarea)
     const onSubmit = (e) => {
         e.preventDefault();
 /*         const form = e.target;
@@ -16,10 +18,20 @@ const TaskCreation = (props) => {
         for (const [key, val] of formData.entries()) payload[key] = val;
         const tareaNueva = payload['ftarea']; */
 
-        setTareas(
-            previousState => 
-                [...previousState, tarea]  
-        )
+        if(params.id){
+            //tareas.map( index == params.id =>  setTareas(tarea => tareas[index]=tarea))
+           const  tareasaux =  tareas.map(x => x); //hace copia de tareas
+           tareasaux[params.id] = tarea;  //cambia el valor de la tarea que se edita
+           setTareas(tareasaux)
+           console.log(tareasaux)
+
+        } else {
+            setTareas(
+                previousState => 
+                    [...previousState, tarea]  
+            )
+        }
+       
     
     }
     console.log(tareas)
